@@ -1,0 +1,32 @@
+Roteiro de interrupcao
+
+1 . fluxo de execucao
+2 . um pacote de rede eh recebido pela placa de rede
+3 . transmite para o processor que ele tem que parar a tarefa atual dele
+4 . vai fazer o os dados recebidos da placa de rede serem processados para memoria
+5 . o processador volta a fazer o processo anterior
+
+Interrupcoes tipicas
+
+erro de divisao
+excecao de debug
+null interrupt
+
+seperacao de memoria
+  -> cada aplicacao de eh tem espacos de memoria isolados uma da outra.
+
+Chamadas de sistema
+  Funcoes que permitem os acessos aos nucleos de hardware:
+  -> Abrir / ler / fechar arquivos
+  -> Enviar / receber
+  -> Ler o teclado
+  -> Escrever os dados na tela
+
+Como uma aplicacao pode invocar uma funcao do nucleo?
+
+syscall em C
+
+int main () {
+  write (1, "Hello, World!\n", 13);
+  exit (0);
+}
