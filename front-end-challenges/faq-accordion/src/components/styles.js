@@ -28,11 +28,19 @@ export const Star = styled.div`
   width: 2em;
   height: 2em;
   > #axis-x {
-    width: 1em;
+    width: 2em;
     height: 0.5em;
     background-color: #b42af2;
   }
 
   > #axis-y {
+    width: 2em;
+    height: 0.5em;
+    background-color: #b42af2;
+    transform: rotate(90deg);
+    position: relative;
+    bottom: 25%;
+    border-radius: 50em;
+    /* clip-path: circle(50% at 50% 50%); */
   }
 `
