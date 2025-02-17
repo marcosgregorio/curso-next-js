@@ -1,4 +1,4 @@
-export default class RepostaModel {
+export default class RespostaModel {
   private _valor: string;
   private _certa: boolean;
   private _revelada: boolean;
@@ -10,11 +10,11 @@ export default class RepostaModel {
   }
 
   static certa(valor: string) {
-    return new RepostaModel(valor, true);
+    return new RespostaModel(valor, true);
   }
 
   static errada(valor: string) {
-    return new RepostaModel(valor, false);
+    return new RespostaModel(valor, false);
   }
 
   // Getter e Setter para "valor"
@@ -42,5 +42,9 @@ export default class RepostaModel {
 
   public set revelada(value: boolean) {
     this._revelada = value;
+  }
+
+  show() {
+    return new RespostaModel(this._valor, this._certa, true);
   }
 }
