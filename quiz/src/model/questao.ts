@@ -1,3 +1,5 @@
+import { shuffle } from "@/functions/arrays";
+
 export default class QuestaoModel {
   private _id: number;
   private _enunciado: string;
@@ -9,6 +11,12 @@ export default class QuestaoModel {
     this._enunciado = enunciado;
     this._respostas = respostas;
     this._acertou = acertou;
+  }
+
+
+  shuffleAnswers() {
+    let shuffledAnswers = shuffle(this._respostas);
+    return new QuestaoModel(this._id, this._enunciado, shuffledAnswers, this._acertou); 
   }
 
   public get id(): number {

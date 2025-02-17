@@ -9,6 +9,14 @@ export default class RepostaModel {
     this._revelada = revelada;
   }
 
+  static certa(valor: string) {
+    return new RepostaModel(valor, true);
+  }
+
+  static errada(valor: string) {
+    return new RepostaModel(valor, false);
+  }
+
   // Getter e Setter para "valor"
   public get valor(): string {
     return this._valor;
