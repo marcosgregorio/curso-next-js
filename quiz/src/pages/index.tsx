@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   return (
-    <Questao questao={questoes[0]}/>
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Questao questao={questoes[0]} />
+    </div>
   );
 }
