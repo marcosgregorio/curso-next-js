@@ -14,6 +14,12 @@ export default class QuestaoModel {
     this._acertou = acertou;
   }
 
+  static certa(valor: string) {
+    return new RespostaModel(valor, true);
+  }
+
+  static errada() {}
+
   public get id(): number {
     return this._id;
   }
@@ -48,16 +54,16 @@ export default class QuestaoModel {
 
   shuffleAnswers() {
     let shuffledAnswers = shuffle(this._respostas);
-    return new QuestaoModel(this._id, this._enunciado, shuffledAnswers, this._acertou); 
+    return new QuestaoModel(this._id, this._enunciado, shuffledAnswers, this._acertou);
   }
 
-  answerWith(index: number) : QuestaoModel {
+  answerWith(index: number): QuestaoModel {
     const isCorrect = this._respostas[index]?.certa;
-      const answersToReveal = this._respostas.map((resposta, i) => {
+    const answersToReveal = this._respostas.map((resposta, i) => {
       const selectedAnswer = index === i;
       const shouldReveal = selectedAnswer || resposta.certa;
-      return shouldReveal ? resposta.show() : resposta
-    })
+      return shouldReveal ? resposta.show() : resposta;
+    });
 
     return new QuestaoModel(this._id, this._enunciado, answersToReveal, isCorrect);
   }
