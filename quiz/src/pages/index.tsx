@@ -4,6 +4,7 @@ import Questao from "@/components/Questao";
 import { questoes } from "./api/bancoDeResposta";
 
 export default function Home() {
+  // const [questao, setques]
   function respostaFornecida(indice: number) {
     console.log(indice);
   }

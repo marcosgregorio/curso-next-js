@@ -46,3 +46,25 @@
     font-size: 1.3rem;
     font-weight: bold;
 }
+
+.verso>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    border-radius: 12px;
+}
+
+.certa {
+    background-color: #2BAA6d;
+}
+
+.errada {
+    background-color: #E44a4c;
+}
+
+.certa,
+.errada,
+.valor {
+    font-size: 1.5rem
+}
