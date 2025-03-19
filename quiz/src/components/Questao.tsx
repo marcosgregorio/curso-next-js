@@ -3,10 +3,12 @@ import { JSX } from "react";
 import styles from "@/styles/Questao.module.css";
 import Enunciado from "./Enunciado";
 import Resposta from "./Resposta";
+import Temporizador from "./Temporizador";
 
 interface QuestaoProps {
   questao: QuestaoModel;
   respostaFornecida: (indice: number) => void;
+  temporEsgotado: () => void;
 }
 
 const letras = [
@@ -34,6 +36,7 @@ export default function Questao(props: QuestaoProps): JSX.Element {
   return (
     <div className={styles.questao}>
       <Enunciado texto={questao.enunciado} />
+      <Temporizador duracao={60} tempoEsgotado={props.temporEsgotado}/>
       <div>
         {renderizarRespostas()}
       </div>

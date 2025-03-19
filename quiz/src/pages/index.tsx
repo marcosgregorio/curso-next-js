@@ -1,13 +1,20 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
 import Questao from "@/components/Questao";
 import { questoes } from "./api/bancoDeResposta";
+import { useState } from "react";
 
 export default function Home() {
-  // const [questao, setques]
+  const [questao, setQuestao] = useState(questoes[0]);
+
   function respostaFornecida(indice: number) {
+    setQuestao(questao.answerWith(indice));
     console.log(indice);
   }
+
+  function tempoEsgotado() {
+    setQuestao(questao.answerWith(-1));
+    console.log("Tempo esgotado");
+  }
+
   return (
     <div
       style={{
@@ -17,7 +24,7 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Questao questao={questoes[0]} respostaFornecida={respostaFornecida} />
+      <Questao questao={questao} respostaFornecida={respostaFornecida} temporEsgotado={tempoEsgotado}/>
     </div>
   );
 }
