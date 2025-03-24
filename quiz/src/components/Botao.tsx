@@ -8,20 +8,6 @@ interface BotaoProps {
   desabilitado?: boolean;
 }
 
-// type BotaoProps =
-//   | {
-//       texto: string;
-//       onClick: () => void;
-//       desabilitado?: boolean;
-//       href: never;
-//     }
-//   | {
-//       href: string;
-//       texto: string;
-//       desabilitado?: boolean;
-//       onClick?: never;
-//     };
-
 function renderizarBotao(props: BotaoProps) {
   return (
     <div>
@@ -31,7 +17,6 @@ function renderizarBotao(props: BotaoProps) {
         style={{
           backgroundColor: props.desabilitado ? "#979797" : "#9885f0",
         }}
-        // className={styles.botao}
       >
         {props.texto}
       </button>
