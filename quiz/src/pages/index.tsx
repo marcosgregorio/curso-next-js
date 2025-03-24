@@ -1,7 +1,6 @@
-import Questao from "@/components/Questao";
 import { questoes } from "./api/bancoDeResposta";
 import { useState } from "react";
-import Botao from "@/components/Botao";
+import Questionario from "@/components/Questionario";
 
 export default function Home() {
   const [questao, setQuestao] = useState(questoes[0]);
@@ -29,13 +28,9 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Questao
-        questao={questao}
-        tempoParaResposta={20}
-        respostaFornecida={respostaFornecida}
-        temporEsgotado={tempoEsgotado}
-      />
-      <Botao texto="teste do teste" onClick={() => window.alert("teste")} ></Botao>
+      <Questionario questao={questao} ultima={false} questaoRespondida={setQuestao} irParaProximoPasso={() => console.log("Próxima")}>
+
+      </Questionario>
     </div>
   );
 }
