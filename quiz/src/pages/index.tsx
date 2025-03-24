@@ -6,12 +6,15 @@ export default function Home() {
   const [questao, setQuestao] = useState(questoes[0]);
 
   function respostaFornecida(indice: number) {
+    console.log("resposta errada",questao.primeiraRespostaErrada);
     setQuestao(questao.answerWith(indice));
     console.log(indice);
   }
 
   function tempoEsgotado() {
-    setQuestao(questao.answerWith(-1));
+    if (questao.naoRespondida) {
+      setQuestao(questao.answerWith(-1));
+    }
     console.log("Tempo esgotado");
   }
 
@@ -24,7 +27,11 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Questao questao={questao} respostaFornecida={respostaFornecida} temporEsgotado={tempoEsgotado}/>
+      <Questao
+        questao={questao}
+        respostaFornecida={respostaFornecida}
+        temporEsgotado={tempoEsgotado}
+      />
     </div>
   );
 }

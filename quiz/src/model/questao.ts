@@ -52,6 +52,18 @@ export default class QuestaoModel {
     this._respostas = value;
   }
 
+  public get naoRespondida() {
+    return !this.acertou;
+  }
+
+  public get primeiraRespostaErrada() {
+    return this._respostas.findIndex((resposta) => {
+      if (!resposta.certa) {
+        return resposta;
+      }
+    });
+  }
+
   shuffleAnswers() {
     let shuffledAnswers = shuffle(this._respostas);
     return new QuestaoModel(this._id, this._enunciado, shuffledAnswers, this._acertou);
