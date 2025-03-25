@@ -44,6 +44,10 @@ export default class RespostaModel {
     this._revelada = value;
   }
 
+  static fromObject(obj: RespostaModel): RespostaModel {
+    return new RespostaModel(obj.valor, obj.certa, obj.revelada);
+  }
+
   show() {
     return new RespostaModel(this._valor, this._certa, true);
   }

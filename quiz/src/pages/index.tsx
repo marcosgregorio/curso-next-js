@@ -1,9 +1,34 @@
 import { questoes } from "./api/bancoDeResposta";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Questionario from "@/components/Questionario";
+import QuestaoModel from "@/model/questao";
 
 export default function Home() {
-  const [questao, setQuestao] = useState(questoes[0]);
+  const [questao, setQuestao] = useState<QuestaoModel>(questoes[0]);
+  const BASE_URL = "http://localhost:3000/api";
+  const [idsDasQuestoes, setIdsDasQuestoes] = useState<number[]>([]);
+
+  async function carregarIdsDasQuestoes() {
+    const resp = await fetch(`${BASE_URL}/questionario`);
+    const idsDasQuestoes = await resp.json();
+    setIdsDasQuestoes(idsDasQuestoes);
+  }
+
+  async function carregarQuestao(id: number) {
+    const resp = await fetch(`${BASE_URL}/questoes/${id}`);
+    const data: QuestaoModel = await resp.json();
+    setQuestao(data);
+  }
+
+  useEffect(() => {
+    carregarIdsDasQuestoes();
+  }, []);
+
+  useEffect(() => {
+    if (idsDasQuestoes.length > 0) {
+      carregarQuestao(idsDasQuestoes[0]);
+    }
+  }, [idsDasQuestoes]);
 
   function respostaFornecida(indice: number) {
     console.log("resposta errada",questao.primeiraRespostaErrada);
@@ -28,7 +53,12 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Questionario questao={questao} ultima={false} questaoRespondida={setQuestao} irParaProximoPasso={() => console.log("Próxima")}>
+      <Questionario 
+        questao={questao} 
+        ultima={false} 
+        questaoRespondida={setQuestao} 
+        irParaProximoPasso={() => console.log("Próxima")}
+      >
 
       </Questionario>
     </div>

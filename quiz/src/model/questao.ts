@@ -64,6 +64,11 @@ export default class QuestaoModel {
     });
   }
 
+  static fromObject(obj: QuestaoModel): QuestaoModel {
+    const respostas = obj.respostas.map(RespostaModel.fromObject);
+    return new QuestaoModel(obj.id, obj.enunciado, respostas, obj.acertou);
+  }
+
   shuffleAnswers() {
     let shuffledAnswers = shuffle(this._respostas);
     return new QuestaoModel(this._id, this._enunciado, shuffledAnswers, this._acertou);
