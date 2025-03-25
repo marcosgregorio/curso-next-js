@@ -2,6 +2,7 @@ import { questoes } from "./api/bancoDeResposta";
 import { useEffect, useState } from "react";
 import Questionario from "@/components/Questionario";
 import QuestaoModel from "@/model/questao";
+import { debug } from "console";
 
 export default function Home() {
   const [questao, setQuestao] = useState<QuestaoModel>(questoes[0]);
@@ -9,15 +10,24 @@ export default function Home() {
   const [idsDasQuestoes, setIdsDasQuestoes] = useState<number[]>([]);
 
   async function carregarIdsDasQuestoes() {
-    const resp = await fetch(`${BASE_URL}/questionario`);
-    const idsDasQuestoes = await resp.json();
-    setIdsDasQuestoes(idsDasQuestoes);
+    try {
+      const resp = await fetch(`${BASE_URL}/questionario`);
+      const idsDasQuestoes: number[] = await resp.json();
+      setIdsDasQuestoes(idsDasQuestoes);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   }
 
   async function carregarQuestao(id: number) {
-    const resp = await fetch(`${BASE_URL}/questoes/${id}`);
-    const data: QuestaoModel = await resp.json();
-    setQuestao(data);
+    try {
+      const resp = await fetch(`${BASE_URL}/questoes/${id}`);
+      const data: QuestaoModel = await resp.json();
+      const novaQuestao = QuestaoModel.fromObject(data);
+      setQuestao(novaQuestao);
+    } catch (error) {
+      console.error("Erro ao carregar questão", error);
+    }
   }
 
   useEffect(() => {
@@ -31,7 +41,7 @@ export default function Home() {
   }, [idsDasQuestoes]);
 
   function respostaFornecida(indice: number) {
-    console.log("resposta errada",questao.primeiraRespostaErrada);
+    console.log("resposta errada", questao.primeiraRespostaErrada);
     setQuestao(questao.answerWith(indice));
     console.log(indice);
   }
@@ -53,14 +63,12 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Questionario 
-        questao={questao} 
-        ultima={false} 
-        questaoRespondida={setQuestao} 
+      <Questionario
+        questao={questao}
+        ultima={false}
+        questaoRespondida={setQuestao}
         irParaProximoPasso={() => console.log("Próxima")}
-      >
-
-      </Questionario>
+      ></Questionario>
     </div>
   );
 }

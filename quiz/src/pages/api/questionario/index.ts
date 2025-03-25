@@ -3,5 +3,6 @@ import { questoes } from "../bancoDeResposta"
 import { shuffle } from "@/functions/arrays";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
-    return res.status(200).json(questoes.map(questao => questao.shuffleAnswers()));
+    const respostas = questoes.map(questao => questao.id);
+    return res.status(200).json(respostas);
 }
