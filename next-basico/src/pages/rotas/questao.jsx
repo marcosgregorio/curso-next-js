@@ -5,7 +5,7 @@ export default function questao() {
 
     const renderizarLista = () => {
         if (questao) {
-            return questao.respostas.map((resposta, i) => {
+            return questao.respostas?.map((resposta, i) => {
                 return <li key={i}>{resposta.resposta}</li>
             })
         }

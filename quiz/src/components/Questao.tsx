@@ -13,34 +13,35 @@ interface QuestaoProps {
 }
 
 const letras = [
-  { valor: 'A', cor: '#F2C866' },
-  { valor: 'B', cor: '#F266BA' },
-  { valor: 'C', cor: '#85D4F2' },
-  { valor: 'D', cor: '#BCE596' },
-]
+  { valor: "A", cor: "#F2C866" },
+  { valor: "B", cor: "#F266BA" },
+  { valor: "C", cor: "#85D4F2" },
+  { valor: "D", cor: "#BCE596" },
+];
 
 export default function Questao(props: QuestaoProps): JSX.Element {
   const questao = props.questao;
 
   function renderizarRespostas() {
-    return questao.respostas.map((resposta, i) => {
-      return <Resposta key={i + "_" + resposta}
-        valor={resposta}
-        indice={i}
-        letra={letras[i].valor}
-        corLetra={letras[i].cor}
-        respostaFornecida={props.respostaFornecida}
-      />;
+    return questao.respostas?.map((resposta, i) => {
+      return (
+        <Resposta
+          key={i + "_" + resposta}
+          valor={resposta}
+          indice={i}
+          letra={letras[i].valor}
+          corLetra={letras[i].cor}
+          respostaFornecida={props.respostaFornecida}
+        />
+      );
     });
   }
 
   return (
     <div className={styles.questao}>
       <Enunciado texto={questao.enunciado} />
-      <Temporizador duracao={props.tempoParaResposta ?? 10} tempoEsgotado={props.temporEsgotado}/>
-      <div>
-        {renderizarRespostas()}
-      </div>
+      <Temporizador duracao={props.tempoParaResposta ?? 10} tempoEsgotado={props.temporEsgotado} />
+      <div>{renderizarRespostas()}</div>
     </div>
   );
 }
