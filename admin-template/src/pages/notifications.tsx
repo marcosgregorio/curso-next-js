@@ -6,7 +6,6 @@ export default function Notificacoes() {
 
   return (
     <Layout subtitulo="Notificacoes" titulo="Notificações">
-      { contexto.nome}
     </Layout>
   );
 }

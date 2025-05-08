@@ -1,20 +1,33 @@
 import { defaultMaxListeners } from "events";
 import App from "next/app";
 import { createContext } from "react";
+import { useState } from "react";
 
-const AppContext = createContext({
-    nome: "",
-});
+type Theme = "dark" | "light";
+
+interface AppContextType {
+  tema?: Theme;
+  alternarTema?: () => void;
+}
+
+const AppContext = createContext<AppContextType>({});
 
 interface AppProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function AppProvider(props: AppProviderProps) {
+  const [tema, setTema] = useState<Theme>("dark");
+
+  function alternarTema() {
+    setTema(tema === "dark" ? "light" : "dark");
+  }
+
   return (
     <AppContext.Provider
       value={{
-        nome: "Marcos 42",
+        tema,
+        alternarTema,
       }}
     >
       {props.children}
