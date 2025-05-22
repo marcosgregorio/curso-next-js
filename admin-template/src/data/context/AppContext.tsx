@@ -1,5 +1,3 @@
-import { defaultMaxListeners } from "events";
-import App from "next/app";
 import { createContext } from "react";
 import { useState } from "react";
 
